@@ -1,40 +1,22 @@
-import React, { useState, useEffect } from "react"; // React and hooks
-import AppBar from "@mui/material/AppBar"; // MUI AppBar component for the header
-import Toolbar from "@mui/material/Toolbar"; // MUI Toolbar component
-import Typography from "@mui/material/Typography"; // MUI Typography for text
-import Button from "@mui/material/Button"; // MUI Button for actions
-import { useNavigate } from "react-router-dom"; // React Router hook for navigation
-import { styled } from "@mui/material/styles"; // MUI styled component
-import { auth } from "../../firebase"; // Firebase auth module
-import { signOut, onAuthStateChanged } from "firebase/auth"; // Firebase authentication methods
-import Box from "@mui/material/Box"; // MUI Box for layout
-import Container from "@mui/material/Container"; // MUI Container for responsive layout
+import React, { useContext, useState, useEffect } from "react";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import { AuthContext } from "../../contexts/authContexts"; // Import AuthContext
+import Box from "@mui/material/Box";
 
-// Styled component for the AppBar offset
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = () => {
-  const [user, setUser] = useState(null); // State for managing user authentication status
-  const navigate = useNavigate(); // Hook for navigation
+  const { isAuthenticated, signout, userName } = useContext(AuthContext); // Consume AuthContext
+  const navigate = useNavigate();
 
-  // Set up authentication state listener
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user); // Update user state on authentication change
-    });
-    return () => unsubscribe(); // Clean up the listener on component unmount
-  }, []);
-
-  // Handle user sign out
   const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Signed out successfully");
-        navigate("/"); // Navigate to homepage on successful sign-out
-      })
-      .catch((error) => {
-        console.log(error.message); // Log any error that occurs during sign out
-      });
+    signout(); // Log out and update the state in AuthContext
+    navigate("/"); // Redirect to home after sign out
   };
 
   return (
@@ -63,9 +45,9 @@ const SiteHeader = () => {
             </Button>
 
             {/* Conditionally render buttons based on user authentication */}
-            {user ? (
+            {isAuthenticated ? (
               <Button color="inherit" onClick={handleSignOut}>
-                Sign Out
+                Sign Out ({userName})
               </Button>
             ) : (
               <>

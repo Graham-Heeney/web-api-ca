@@ -14,8 +14,6 @@ const LoginPage = props => {
     };
 
     let location = useLocation();
-
-    // Set 'from' to path where browser is redirected after a successful login - either / or the protected path user requested
     const { from } = location.state ? { from: location.state.from.pathname } : { from: "/" };
 
     if (context.isAuthenticated === true) {
@@ -23,20 +21,57 @@ const LoginPage = props => {
     }
 
     return (
-        <>
-            <h2>Login page</h2>
-            <p>You must log in to view the protected pages </p>
-            <input id="username" placeholder="user name" onChange={e => {
-                setUserName(e.target.value);
-            }}></input><br />
-            <input id="password" type="password" placeholder="password" onChange={e => {
-                setPassword(e.target.value);
-            }}></input><br />
-            {/* Login web form  */}
-            <button onClick={login}>Log in</button>
-            <p>Not Registered?
-                <Link to="/signup">Sign Up!</Link></p>
-        </>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "#f0f4f8" }}>
+            <div style={{ backgroundColor: "white", padding: "40px", borderRadius: "8px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)", width: "100%", maxWidth: "400px", textAlign: "center" }}>
+                <h2 style={{ color: "#1976d2" }}>Login</h2>
+                <input 
+                    id="username" 
+                    placeholder="User Name" 
+                    onChange={e => setUserName(e.target.value)} 
+                    style={{ 
+                        width: "100%", 
+                        padding: "10px", 
+                        margin: "10px 0", 
+                        borderRadius: "4px", 
+                        border: "1px solid #ddd", 
+                        fontSize: "16px" 
+                    }} 
+                />
+                <input 
+                    id="password" 
+                    type="password" 
+                    placeholder="Password" 
+                    onChange={e => setPassword(e.target.value)} 
+                    style={{ 
+                        width: "100%", 
+                        padding: "10px", 
+                        margin: "10px 0", 
+                        borderRadius: "4px", 
+                        border: "1px solid #ddd", 
+                        fontSize: "16px" 
+                    }} 
+                />
+                <button 
+                    onClick={login} 
+                    style={{ 
+                        width: "100%", 
+                        padding: "12px", 
+                        backgroundColor: "#1976d2", 
+                        color: "white", 
+                        border: "none", 
+                        borderRadius: "4px", 
+                        cursor: "pointer", 
+                        fontSize: "16px" 
+                    }}
+                >
+                    Log In
+                </button>
+                <p style={{ marginTop: "20px", fontSize: "14px" }}>
+                    Not Registered? 
+                    <Link to="/signup" style={{ color: "#1976d2", textDecoration: "none", fontWeight: "bold" }}> Sign Up!</Link>
+                </p>
+            </div>
+        </div>
     );
 };
 
