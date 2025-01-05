@@ -71,7 +71,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             
             {/* Route for the Now Playing Movies Page */}
-            <Route path="/movies/now-playing" element={<NowPlayingMovies />} />
+            <Route path="/movies/now_playing" element={<NowPlayingMovies />} />
           </Routes>
         </MoviesContextProvider>
         </AuthContextProvider>

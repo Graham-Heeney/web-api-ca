@@ -1,5 +1,5 @@
 import React, { useState } from "react";  
-import { getNowPlayingMovies } from "../api/tmdb-api"; 
+import { getNowPlayingMovies } from "../api/movies-api"; 
 import PageTemplate from "../components/templateMovieListPage"; 
 import { useQuery } from "react-query"; 
 import Spinner from "../components/spinner";
@@ -12,9 +12,10 @@ const NowPlayingMovies = (props) => {
     // Track the current page number
 
     const { data, error, isLoading, isError } = useQuery(
-      ['nowPlaying', currentPage], 
-      () => getNowPlayingMovies(currentPage)
+      ['now_playing', { page: currentPage }],
+      getNowPlayingMovies
     );
+
     // Fetch now playing movies data using react-query
 
     if (isLoading) {

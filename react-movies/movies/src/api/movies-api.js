@@ -11,8 +11,6 @@ export const getMovies = async () => {
 
   
   
-  
-  
     export const login = async (username, password) => {
       const response = await fetch('http://localhost:8080/api/users?action=login', {
           headers: {
@@ -33,4 +31,15 @@ export const getMovies = async () => {
           body: JSON.stringify({ username: username, password: password })
       });
       return response.json();
+  };
+
+  export const getNowPlayingMovies = async () => {
+    const response = await fetch(
+      `http://localhost:8080/api/movies/nowplaying?&page=1`,
+      { headers: {
+        'Authorization': window.localStorage.getItem('token')
+        }
+      }
+    )
+    return response.json();
   };
