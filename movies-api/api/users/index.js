@@ -17,6 +17,28 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.post('/favorites', authenticateUser, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);  // Find the user by their ID
+        const movieId = req.body.movieId;  // Get the movie ID from the request body
+        if (!user.favourites.includes(movieId)) {  // Check if the movie is not already in the favorites
+            user.favourites.push(movieId);  // Add the movie ID to the favorites array
+            await user.save();  // Save the updated user document to the database
+        }
+        res.status(200).json({ message: 'Movie added to favorites' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+router.get('/favorites', authenticateUser, async (req, res) => {
+    try {
+      const user = await User.findById(req.user._id).populate('favorites');
+      res.status(200).json(user.favorites);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
 // Register (Create) User
 router.post('/', asyncHandler(async (req, res) => {
     try {

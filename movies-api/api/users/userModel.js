@@ -14,6 +14,7 @@ const UserSchema = new Schema({
       message: 'Password must be at least 8 characters long and include at least one letter, one number, and one special character.',
     },
   },
+  favourites: [{ type: Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
 //UserSchema.index({ username: 1 }, { unique: true });
@@ -27,8 +28,7 @@ UserSchema.statics.findByUserName = function (username) {
 };
 
 UserSchema.pre('save', async function(next) {
-  const saltRounds = 10; // You can adjust the number of salt rounds
-  //const user = this;
+  const saltRounds = 10; 
   if (this.isModified('password') || this.isNew) {
     try {
       const hash = await bcrypt.hash(this.password, saltRounds);

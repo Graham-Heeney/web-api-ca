@@ -15,6 +15,8 @@ import Signup from "./pages/signupPage";
 import Login from "./pages/loginPage";
 import NowPlayingMovies from './pages/nowPlayingPage';
 import AuthContextProvider from "./contexts/authContexts";
+import ProtectedRoute from "./protectedRoutes";
+
 
 // Create the query client for React Query
 const queryClient = new QueryClient({
@@ -58,8 +60,9 @@ const App = () => {
             {/* Route for adding a movie review */}
             <Route path="/reviews/form" element={<AddMovieReviewPage />} />
             
-            {/* Route for the Top Rated Movies Page */}
-            <Route path="/movies/top-rated" element={<TopRatedMovies />} />
+            <Route path="/" element={<HomePage />} />
+              {/* Protect Top Rated Movies route */}
+              <Route path="/movies/top-rated" element={<ProtectedRoute><TopRatedMovies /></ProtectedRoute>} />
             
             {/* Route for the Signup Page */}
             <Route path="/signup" element={<Signup />} />
