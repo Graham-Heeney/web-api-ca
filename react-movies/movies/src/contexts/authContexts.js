@@ -31,8 +31,14 @@ const AuthContextProvider = (props) => {
     setUserName("");
   };
 
+  const register = async (username, password) => {
+    const result = await signup(username, password);
+    console.log(result.code);
+    return (result.code == 201) ? true : false;
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, authenticate, signout, userName }}>
+    <AuthContext.Provider value={{ isAuthenticated, authenticate, signout, register, userName }}>
       {props.children}
     </AuthContext.Provider>
   );
