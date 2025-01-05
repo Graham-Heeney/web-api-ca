@@ -16,7 +16,7 @@ const UserSchema = new Schema({
   },
 });
 
-UserSchema.index({ username: 1 }, { unique: true });
+//UserSchema.index({ username: 1 }, { unique: true });
 
 UserSchema.methods.comparePassword = async function (passw) { 
   return await bcrypt.compare(passw, this.password); 

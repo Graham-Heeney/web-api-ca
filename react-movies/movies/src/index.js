@@ -14,6 +14,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage';
 import Signup from "./pages/signupPage";
 import Login from "./pages/loginPage";
 import NowPlayingMovies from './pages/nowPlayingPage';
+import AuthContextProvider from "./contexts/authContexts";
 
 // Create the query client for React Query
 const queryClient = new QueryClient({
@@ -31,6 +32,8 @@ const App = () => {
     // Wrapping the app in the QueryClientProvider to use React Query throughout
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      <AuthContextProvider>
+
         {/* Header component that likely includes navigation links */}
         <SiteHeader />
         
@@ -68,6 +71,7 @@ const App = () => {
             <Route path="/movies/now-playing" element={<NowPlayingMovies />} />
           </Routes>
         </MoviesContextProvider>
+        </AuthContextProvider>
       </BrowserRouter>
       
       {/* React Query DevTools to inspect queries and mutations in development */}
