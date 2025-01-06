@@ -1,53 +1,46 @@
 # Assignment 2 - Web API.
 
-Name: Your Name
+Name: Graham Heeney
 
 ## Features.
 
 A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** (or modifications to existing features)
  
- + Feature 1 
- + Feature 2 
- + Feature 3 
- + etc
+ + Log in 
+ + Register 
+ + Log out  
+ + Protected route
 
 ## Setup requirements.
 
-[ Outline any non-standard setup steps necessary to run your app locally after cloning the repo.]
+npm install
+npm install --save mongoose
 
 ## API Configuration
 
-Describe any configuration that needs to take place before running the API. For example, creating an `.env` file and what variables to put in it. Give an example of how this might be done.
-
-REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB, just placeholders as indicated below:
+A .env file was created
 
 ______________________
-NODEENV=development
+NODE_ENV=development
 PORT=8080
-HOST=
-mongoDB=YourMongoURL
-seedDb=true
-secret=YourJWTSecret
+HOST=localhost
+MONGO_DB=
+TMDB_KEY=
+
 ______________________
 
-## API Design
-Give an overview of your web API design, perhaps similar to the following: 
 
-- /api/movies | GET | Gets a list of movies 
-- /api/movies/{movieid} | GET | Gets a single movie 
-- /api/movies/{movieid}/reviews | GET | Get all reviews for movie 
-- /api/movies/{movieid}/reviews | POST | Create a new review for Movie 
-
-If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
 
 ## Security and Authentication
 
-Give details of authentication/security implemented on the API (e.g. passport/sessions). Indicate which routes are protected.
 
-## Integrating with React App
+Validation for passwords created. Top Rated movies can only be seen from a logged in user.
 
-Describe how you integrated your React app with the API. List the views that use your Web API instead of the TMDB API. Describe any other updates to the React app from Assignment One.
 
 ## Independent learning (if relevant)
 
-Briefly explain any non-standard features developed for the app.   
+I leanred how to validate passwords and make them require certain inputs.
+https://www.w3resource.com/javascript/form/password-validation.php#:~:text=To%20check%20a%20password%20between%208%20to%2015%20characters%20which
+
+i learned how to implement protected routes by altering this guide to suit my code
+https://dev.to/collins87mbathi/reactjs-protected-route-m3j
